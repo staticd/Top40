@@ -55,7 +55,7 @@ def gethits(): #this function gets the latest top 40 most played artists on
 	return hitlist_a #list
 	
 search			= '* "free music" * music * download * '
-dont_search		= ' -rapidshare -torrent -site:limewire.com -site:bearshare.com -site:*rapidshare*.com -site:*torrent*.com -site:abcmusic.net -site:kazaa.com'
+dont_search		= ' -rapidshare -torrent -site:limewire.com -site:bearshare.com -site:*rapidshare*.com -site:*torrent*.com -site:abcmusic.net -site:kazaa.com -site:velocityreviews.com -site:globalshareware.com'
 hot_bands		= gethits()
 known_free		= ['blink182','Smashing Pumpkins'] #bands that i know provide free music
 
