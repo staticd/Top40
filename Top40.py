@@ -55,7 +55,8 @@ def gethits(): #this function gets the latest top 40 most played artists on
 	return hitlist_a #list
 	
 search			= '* "free music" * music * download * '
-dont_search		= ' -rapidshare -torrent -site:limewire.com -site:bearshare.com -site:*rapidshare*.com -site:*torrent*.com -site:abcmusic.net -site:kazaa.com -site:velocityreviews.com -site:globalshareware.com'
+#keep updating with sites that are bad
+dont_search		= ' -rapidshare -torrent -site:limewire.com -site:*wire*.com -site:*wire.com -site:wire*.com -site:*share*.com -site:*share.com -site:share*.com -site:*torrent.com -site:torrent*.com -site:bearshare.com -site:*rapidshare*.com -site:*torrent*.com -site:abcmusic.net -site:kazaa.com -site:velocityreviews.com -site:globalshareware.com' 
 hot_bands		= gethits()
 known_free		= ['blink182','Smashing Pumpkins'] #bands that i know provide free music
 
@@ -85,7 +86,7 @@ for band in hot_bands:
 			count += 1
 		file.write('<a href="' + str(url) + '"' + 'target="_blank">' + str(title) + '</a>\n')
 		counter += 1
-		if counter == 5:
+		if counter == 5: #i only want the top five hits
 			break
 	time.sleep(.001) #Google does not like being harassed!
 
