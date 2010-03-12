@@ -1,4 +1,14 @@
-**read source**
---more documentation coming soon
---most can be read from the header of the source (Top40.py)
+__Intro__
 
+:This is a very short program that... 
+	::pulls the 'Top 40' artists played on Alt Nation on Sirius XM radio over the past week
+	::runs a custom Google search for free music from __each__ of the 40 artists
+	::builds an html 'input' block as an output `txt' file
+
+__Usage__
+
+:from the python prompt `execfile('Top40.py')'
+
+__Notes__
+
+:I am new to all of this, so if you have any advice for me, give me a shout...
