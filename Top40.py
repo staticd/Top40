@@ -22,6 +22,8 @@
 #	-must have xgoogle library 
 #	-->http://github.com/pkrumins
 #
+#	Code is licensed under MIT license.
+#
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 import time
@@ -77,8 +79,7 @@ dont_search	=	' -rapidshare'\
 				' -site:*torrent*.com'\
 				' -site:abcmusic.net'\
 				' -site:kazaa.com'\
-				' -site:velocityreviews.com'\
-				' -site:globalshareware.com' 
+				' -site:velocityreviews.com'
 
 hot_bands = gethits()
 
@@ -96,12 +97,13 @@ for bnd in known_free:
 ###############################################################################
 # make the output file 'unique'
 ###############################################################################
-file = open(os.path.expanduser('~/top40_' + str(int(time.time())) + '.txt'),'w')
+file=open(os.path.expanduser('~/top40_' + str(int(time.time())) + '.txt'),'w')
 
 ###############################################################################
 # Google only accepts 32 search parameters
 ###############################################################################
 test_list = search + dont_search
+makeList = 0
 
 if len(test_list.split()) >= 31:
 	print "Google's search parameter limit (31) reached or exceeded"
@@ -113,8 +115,6 @@ for band in hot_bands:
 	
 	try:
 		gs = GoogleSearch(search + band + dont_search, random_agent=True)		
-#test...
-#		print 'truth for gs',bool(gs)
 		gs.results_per_page = 25 # can also be 25 or 100
 		rand = random.randint(0,1000) # adjust for experiment
 		print 'sleeping for ' + str(rand) + ' seconds...'
@@ -123,8 +123,6 @@ for band in hot_bands:
 		traceback.print_exc()
 	try: 
 		results = gs.get_results()
-#test...
-#		print bool(results),len(results)
 	except:
 		print 'moving on',band
 		traceback.print_exc()
@@ -136,22 +134,26 @@ for band in hot_bands:
 
 	for res in results:
 		try:
-			#print type(res),'*',type(res.title)
 			title = res.title.encode("utf8")
 			url = res.url.encode("utf8") 
 			if count == 0:
 				file.write(':artist: __<b>' + band.strip('"') + '</b>__\n')
 				count += 1
-	#test...
-	#			print band
-	
-			file.write('<a href="' + str(url) + '"' + 'target="_blank">' + str(title) + '</a>\n')
+			if makeList == 0:
+				file.write('<ul>\n')
+				makeList += 1
+			file.write('<li><a href="' + str(url) + '"' + 'target="_blank">' +
+					   str(title) + '</a>\n')
 			counter += 1
 			if counter == 5: # I only want the top five hits 
+				file.write('</ul>\n')
+				makeList = 0
+				# Force write to disk, in order to view output in real time.
+				file.flush()
+				os.fsync(file)
 				break
-	#test...
-	#		print str(title),'**',str(url),'last title and url','counter',counter
 		except:
 			print traceback.print_exc()
 
-file.close()		
+file.close()
+
