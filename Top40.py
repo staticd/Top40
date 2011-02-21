@@ -46,7 +46,7 @@ def gethits():
 	html = response.read()
 	###########################################################################
 	# TODO: did not find 'Thirty Seconds to Mars,' you found ' Seconds to Mars'
-    ###########################################################################
+	###########################################################################
 	hitlist	= ''.join(re.findall('<td>([0-9 A-Za-z0-9 \n&]*)</td>',html)) 
 	hitlist_a = []
 	hitlist_b = ''
@@ -79,7 +79,8 @@ dont_search	=	' -rapidshare'\
 				' -site:*torrent*.com'\
 				' -site:abcmusic.net'\
 				' -site:kazaa.com'\
-				' -site:velocityreviews.com'
+				' -site:velocityreviews.com'\
+				' -site:blog.ncday.net'
 
 hot_bands = gethits()
 
